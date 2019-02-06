@@ -1,0 +1,18 @@
+language: python
+python:
+        - "3.6" 
+        - "nightly"
+install: 
+        - pip install nose
+        - pip install -r requirements.txt
+        - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+        - tar -xf geckodriver 
+        - export PATH=$(pwd):$PATH
+script:
+        - nosetests --with-coverage
+addons: 
+        - firefox: "latest"
+deploy: 
+        provider: heroku
+        api_key: 
+                secure: $(cat .heroku_api_key)
