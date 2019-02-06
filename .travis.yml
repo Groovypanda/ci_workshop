@@ -3,6 +3,12 @@ language: python
 python:
         - "3.6" 
         - "nightly"
+env:
+        - MOZ_HEADLESS=1
+
+addons: 
+        - firefox: "latest"
+
 before_install:
         - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
         - mkdir geckodriver
@@ -15,10 +21,6 @@ script:
         - nosetests --with-coverage --cov-config .coveragerc
 after_success: 
         - codecov
-env:
-        - MOZ_HEADLESS=1
-addons: 
-        - firefox: "latest"
 deploy: 
         provider: heroku
         api_key: 
