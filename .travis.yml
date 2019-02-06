@@ -1,24 +1,22 @@
 sudo: true
 language: python
 python:
-        - "3.6" 
-        - "nightly"
+        - 3.6 
+        - nightly
 env:
         - MOZ_HEADLESS=1
-
 addons: 
-        - firefox: "latest"
-
+        - firefox: latest
 before_install:
         - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
         - mkdir geckodriver
-        - tar -zxf geckodriver-v0.24.0-linux64.tar.gz  -C geckodriver
+        - tar -xzf geckodriver-v0.24.0-linux64.tar.gz  -C geckodriver
         - sudo chmod +x $PWD/geckodriver/geckodriver
         - export PATH=$PWD/geckodriver:$PATH
 install: 
         - pip install -r requirements/dev.txt
 script:
-        - nosetests --with-coverage --cov-config .coveragerc
+        - nosetests --with-cov --cov-config .coveragerc
 after_success: 
         - codecov
 deploy: 
