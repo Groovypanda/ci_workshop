@@ -16,6 +16,9 @@ before_install:
 install: 
         - pip install -r requirements/dev.txt
 script:
+        - which geckodriver
+        - which firefox
+        - geckodriver --version
         - nosetests --with-cov --cov-config .coveragerc
 after_success: 
         - codecov
