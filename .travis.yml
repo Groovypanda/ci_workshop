@@ -19,7 +19,14 @@ script:
         - nosetests --with-cov --cov-config .coveragerc
 after_success: 
         - codecov
-deploy: 
-        provider: heroku
-        api_key: 
-                secure: $(cat .heroku_api_key)
+jobs:
+        include: 
+                - stage: Deploy
+                  script: skip
+                  deploy: 
+                        provider: heroku
+                        api_key: 
+                                secure: $(cat .heroku_api_key)
+                        app: ci_workshop
+                        on: 
+                                repo: Groovypanda/ci_workshop
